@@ -173,14 +173,13 @@
             function playAudio() {
                 audio.play().then(() => {
                     // Audio started successfully
-                    console.log('Audio is playing');
                 }).catch(error => {
                     console.error('Autoplay failed:', error);
                 });
                 document.removeEventListener('click', playAudio); // Supprimer l'écouteur après la première interaction
             }
 
-            // Déclencher la lecture au premier défilement
+            // Déclencher la lecture sur le premier clic
             document.addEventListener('click', playAudio);
 
             // Régler le volume initial
@@ -192,6 +191,7 @@
                 audio.volume = event.target.value;
             });
         });
+
 
 
     </script>
