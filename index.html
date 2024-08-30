@@ -177,11 +177,11 @@
                 }).catch(error => {
                     console.error('Autoplay failed:', error);
                 });
-                document.removeEventListener('scroll', playAudio); // Supprimer l'écouteur après la première interaction
+                document.removeEventListener('click', playAudio); // Supprimer l'écouteur après la première interaction
             }
 
             // Déclencher la lecture au premier défilement
-            document.addEventListener('scroll', playAudio);
+            document.addEventListener('click', playAudio);
 
             // Régler le volume initial
             const volumeControl = document.getElementById('volume-control');
