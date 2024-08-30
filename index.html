@@ -12,19 +12,24 @@
     <header>
         <h1>BHUIYAN Jahedul</h1>
         <p>Ingénieur en Intelligence Artificielle</p>
-        <p class="contact-info">
-            <span class="icon">📧</span> <a href="mailto:jahedul@hotmail.fr">jahedul@hotmail.fr</a> |
-            <span class="icon">📞</span> <a href="tel:+33658405424">+33 (06) 58 40 54 24</a> |
-            <span class="icon">🚗</span> Permis B |
-            <span class="icon">📍</span> Pantin, FRANCE
-        </p>
-        <audio autoplay loop id="background-music" src="/data/solution-nine.mp3"> </audio>
-        <label for="volume-control">Volume :</label>
-        <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
+        <div class="nav-buttons">
+            <a href="#description">Description</a>
+            <a href="#experience">Expérience</a>
+            <a href="#education">Éducation</a>
+            <a href="#competences">Compétences</a>
+            <a href="#autres">Autres</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <audio autoplay loop id="background-music" src="/data/solution-nine.mp3" value="0.1"></audio>
+        <div class="volume-control-container">
+            <label for="volume-control">Volume :</label>
+            <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
+        </div>
     </header>
+    
 
     <main>
-        <section class="section-parallax section-1">
+        <section id="description" class="section-parallax section-1">
             <article class="content">
                 <h2>Salut à toi</h2>
                 <p>Je suis un jeune ingénieur en Intelligence Artificielle diplômé de l'ESME Sudria à Paris, passionné par la création de solutions innovantes.</p>
@@ -33,7 +38,7 @@
             </article>
         </section>
 
-        <section class="section-parallax section-2">
+        <section id="experience" class="section-parallax section-2">
             <article class="content">
                 <h2>Expérience Professionnelle</h2>
                 <div class="experience">
@@ -63,7 +68,7 @@
             </article>
         </section>
 
-        <section class="section-parallax section-3">
+        <section id="education" class="section-parallax section-3">
             <article class="content">
                 <h2>Éducation</h2>
                 <div class="education">
@@ -95,7 +100,7 @@
             </article>
         </section>
 
-        <section class="section-parallax section-4">
+        <section id="competences" class="section-parallax section-4">
             <article class="content">
                 <h2>Compétences</h2>
                 <ul>
@@ -108,7 +113,7 @@
             </article>
         </section>
 
-        <section class="section-parallax section-5">
+        <section id="autres" class="section-parallax section-5">
             <article class="content">
                 <h2>Langues</h2>
                 <ul>
@@ -131,6 +136,15 @@
                     <li>Bot Discord</li>
                     <li>Trieuse de document</li>
                 </ul>
+            </article>
+        </section>
+
+        <section id="contact" class="section-parallax section-6">
+            <article class="content">
+                <h2>Contact</h2>
+                <p>Mail : jahedul@hotmail.fr</p>
+                <p>LinkedIn : https://www.linkedin.com/in/jahedul-bhuiyan/</p>
+                <p>Téléphone : 06.58.40.54.24</p>
             </article>
         </section>
     </main>
@@ -192,7 +206,51 @@
             });
         });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-parallax');
+            const navButtons = document.querySelectorAll('.nav-buttons a');
 
+            // Fonction pour faire défiler jusqu'à la section correspondante
+            function scrollToSection(event) {
+                event.preventDefault();
+                const targetId = event.target.getAttribute('href').substring(1); // Récupère l'ID de la section cible
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            // Ajouter l'écouteur de clic pour chaque bouton de navigation
+            navButtons.forEach(button => {
+                button.addEventListener('click', scrollToSection);
+            });
+
+            // Supprimer l'écouteur d'événements pour le défilement à la molette
+            window.removeEventListener('wheel', () => {});
+
+            // Réglage et contrôle du volume
+            const audio = document.getElementById('background-music');
+            const volumeControl = document.getElementById('volume-control');
+            
+            audio.volume = volumeControl.value;
+            
+            volumeControl.addEventListener('input', (event) => {
+                audio.volume = event.target.value;
+            });
+
+            // Lecture de l'audio au premier scroll
+            function playAudio() {
+                audio.play().then(() => {
+                    // Audio started successfully
+                }).catch(error => {
+                    console.error('Autoplay failed:', error);
+                });
+                document.removeEventListener('scroll', playAudio);
+            }
+
+            document.addEventListener('scroll', playAudio);
+        });
 
     </script>
 </body>
