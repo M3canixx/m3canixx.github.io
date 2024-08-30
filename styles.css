@@ -107,6 +107,10 @@ h1, h2 {
     font-family: 'Arial', cursive, sans-serif;
 }
 
+a{
+    color: violet;
+}
+
 .nom-stage {
  font-size: large;
 }
@@ -165,7 +169,7 @@ h1, h2 {
 }
 
 /* Images de fond pour les sections */
-.section-1, .section-2, .section-3, .section-4, .section-5, .section-6 {
+.section-1, .section-2, .section-3, .section-4, .section-5 {
     background-image: url('/data/para1.jpg');
 }
 
