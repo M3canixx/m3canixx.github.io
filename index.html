@@ -21,11 +21,7 @@
     
         <label for="volume-control">Volume :</label>
         <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
-
-        <audio autoplay loop id="background-music">
-            <source src="/data/solution-nine.mp3" type="audio/mpeg">
-        </audio>
-
+        <audio autoplay loop id="background-music"> <source src="/data/solution-nine.mp3" type="audio/mpeg"> </audio>
     </header>
 
     <main>
@@ -161,28 +157,17 @@
             scrollToSection(currentSection);
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('background-music');
+        const audio = document.getElementById('background-music');
+        const volumeControl = document.getElementById('volume-control');
 
-            // Lancer l'audio après une interaction de l'utilisateur
-            function playAudio() {
-                audio.play();
-                document.removeEventListener('click', playAudio); // Supprimer l'écouteur après la première interaction
-            }
+        // Régler le volume initial
+        audio.volume = volumeControl.value;
 
-            // Ajout d'un écouteur d'événement pour le clic
-            document.addEventListener('click', playAudio);
-
-            // Initialiser le volume
-            const volumeControl = document.getElementById('volume-control');
-            audio.volume = volumeControl.value;
-
-            // Ajuster le volume en fonction du curseur
-            volumeControl.addEventListener('input', (event) => {
-                audio.volume = event.target.value;
-            });
+        // Écouter les changements sur le curseur de volume
+        volumeControl.addEventListener('input', (event) => {
+            audio.volume = event.target.value;
         });
-            
+        
 
     </script>
 </body>
