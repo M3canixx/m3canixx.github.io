@@ -20,14 +20,13 @@
             <a href="#autres">Autres</a>
             <a href="#contact">Contact</a>
         </div>
-        <audio autoplay loop id="background-music" src="/data/solution-nine.mp3" value="0.1"></audio>
+        <audio autoplay loop id="background-music" src="/data/solution-nine.mp3"></audio>
         <div class="volume-control-container">
             <label for="volume-control">Volume :</label>
             <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
         </div>
     </header>
     
-
     <main>
         <section id="description" class="section-parallax section-1">
             <article class="content">
@@ -143,7 +142,7 @@
             <article class="content">
                 <h2>Contact</h2>
                 <p>Mail : jahedul@hotmail.fr</p>
-                <p>LinkedIn : https://www.linkedin.com/in/jahedul-bhuiyan/</p>
+                <p>LinkedIn : <a href="https://www.linkedin.com/in/jahedul-bhuiyan/" target="_blank" rel="noopener noreferrer">Jahedul Bhuiyan</a></p>
                 <p>Téléphone : 06.58.40.54.24</p>
             </article>
         </section>
@@ -152,6 +151,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section-parallax');
+            const navButtons = document.querySelectorAll('.nav-buttons a');
             let currentSection = 0;
 
             function scrollToSection(index) {
@@ -167,90 +167,33 @@
                 scrollToSection(currentSection);
             });
 
-            scrollToSection(currentSection);
-        });
-
-        const audio = document.getElementById('background-music');
-        const volumeControl = document.getElementById('volume-control');
-
-        // Régler le volume initial
-        audio.volume = volumeControl.value;
-
-        // Écouter les changements sur le curseur de volume
-        volumeControl.addEventListener('input', (event) => {
-            audio.volume = event.target.value;
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('background-music');
-
-            function playAudio() {
-                audio.play().then(() => {
-                    // Audio started successfully
-                }).catch(error => {
-                    console.error('Autoplay failed:', error);
-                });
-                document.removeEventListener('scroll', playAudio); // Supprimer l'écouteur après la première interaction
-            }
-
-            // Déclencher la lecture sur le premier clic
-            document.addEventListener('scroll', playAudio);
-
-            // Régler le volume initial
-            const volumeControl = document.getElementById('volume-control');
-            audio.volume = volumeControl.value;
-
-            // Ajuster le volume
-            volumeControl.addEventListener('input', (event) => {
-                audio.volume = event.target.value;
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.section-parallax');
-            const navButtons = document.querySelectorAll('.nav-buttons a');
-
-            // Fonction pour faire défiler jusqu'à la section correspondante
-            function scrollToSection(event) {
-                event.preventDefault();
-                const targetId = event.target.getAttribute('href').substring(1); // Récupère l'ID de la section cible
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-
-            // Ajouter l'écouteur de clic pour chaque bouton de navigation
             navButtons.forEach(button => {
-                button.addEventListener('click', scrollToSection);
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetId = event.target.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
             });
 
-            // Supprimer l'écouteur d'événements pour le défilement à la molette
-            window.removeEventListener('wheel', () => {});
-
-            // Réglage et contrôle du volume
             const audio = document.getElementById('background-music');
             const volumeControl = document.getElementById('volume-control');
-            
+
             audio.volume = volumeControl.value;
-            
+
             volumeControl.addEventListener('input', (event) => {
                 audio.volume = event.target.value;
             });
 
-            // Lecture de l'audio au premier scroll
             function playAudio() {
-                audio.play().then(() => {
-                    // Audio started successfully
-                }).catch(error => {
-                    console.error('Autoplay failed:', error);
-                });
+                audio.play().catch(error => console.error('Autoplay failed:', error));
                 document.removeEventListener('scroll', playAudio);
             }
+
             document.addEventListener('scroll', playAudio);
         });
-
     </script>
 </body>
 </html>
