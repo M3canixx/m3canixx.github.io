@@ -1,0 +1,180 @@
+:root {
+    --primary-color: #fff;
+    --background-color: #333;
+    --overlay-color: rgba(0, 0, 0, 0.8);
+    --border-radius: 20px;
+    --transition-speed: 0.6s;
+    --font-family: 'Baloo 2', cursive, sans-serif; /* Police beaucoup plus mignonne */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
+}
+
+/* Header et Footer Fixes */
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(33,33,33,0.7);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 10px;
+}
+
+/* Espace réservé pour le contenu */
+.container {
+    padding-top: 50px; /* Ajustement de l'espace pour le header réduit */
+    padding-bottom: 40px; /* Ajustement de l'espace pour le footer réduit */
+}
+
+/* Style des sections en parallaxe */
+.section-parallax {
+    scroll-snap-align: start;
+    height: 100vh;
+    width: 100%; /* Prend toute la largeur de l'écran */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: var(--primary-color);
+}
+
+/* Style pour le contenu */
+.content {
+    position: relative;
+    background-color: var(--overlay-color);
+    padding: 20px 30px;
+    border-radius: var(--border-radius);
+    border: 3px dashed var(--primary-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
+    max-width: 80%; /* Légère réduction pour correspondre à la largeur des sections */
+    margin: 0 auto;
+    text-align: center;
+    color: var(--primary-color);
+    transform: translateY(50px);
+    transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+    overflow: hidden;
+}
+
+.content::before, .content::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: var(--primary-color);
+    width: 100px;
+    height: 100px;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+.content::before {
+    top: -50px;
+    left: -50px;
+}
+
+.content::after {
+    bottom: -50px;
+    right: -50px;
+}
+
+.kawaii-face {
+    font-size: 3em;
+    margin-top: 10px;
+}
+
+h1, h2 {
+    font-family: 'Arial', cursive, sans-serif;
+}
+
+.nom-stage {
+ font-size: large;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    header p,
+    footer {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .section-parallax {
+        padding: 30px 15px;
+    }
+
+    .content {
+        padding: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .kawaii-face {
+        font-size: 1.5em;
+    }
+}
+
+/* Images de fond pour les sections */
+.section-1, .section-2, .section-3, .section-4, .section-5, .section-6 {
+    background-image: url('/data/para1.jpg');
+}
+
+/* Effet de visibilité */
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.kawaii-face {
+    font-size: 2.5em;
+}
