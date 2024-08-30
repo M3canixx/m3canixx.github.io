@@ -167,6 +167,33 @@
             audio.volume = event.target.value;
         });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('background-music');
+
+            function playAudio() {
+                audio.play().then(() => {
+                    // Audio started successfully
+                    console.log('Audio is playing');
+                }).catch(error => {
+                    console.error('Autoplay failed:', error);
+                });
+                document.removeEventListener('scroll', playAudio); // Supprimer l'écouteur après la première interaction
+            }
+
+            // Déclencher la lecture au premier défilement
+            document.addEventListener('scroll', playAudio);
+
+            // Régler le volume initial
+            const volumeControl = document.getElementById('volume-control');
+            audio.volume = volumeControl.value;
+
+            // Ajuster le volume
+            volumeControl.addEventListener('input', (event) => {
+                audio.volume = event.target.value;
+            });
+        });
+
+
     </script>
 </body>
 </html>
