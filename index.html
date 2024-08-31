@@ -12,23 +12,25 @@
     <header>
         <h1>BHUIYAN Jahedul</h1>
         <p>Ingénieur en Intelligence Artificielle</p>
-        <div class="nav-buttons">
-            <a href="#description">Description</a>
-            <a href="#experience">Expérience</a>
-            <a href="#education">Éducation</a>
-            <a href="#competences">Compétences</a>
-            <a href="#autres">Autres</a>
-            <a href="#contact">Contact</a>
-        </div>
+        <nav>
+            <div class="nav-buttons">
+                <a href="#description">Description</a>
+                <a href="#experience">Expérience</a>
+                <a href="#education">Éducation</a>
+                <a href="#competences">Compétences</a>
+                <a href="#autres">Autres</a>
+                <a href="#contact">Contact</a>
+            </ul>
+        </nav>
         <audio autoplay loop id="background-music" src="/data/solution-nine.mp3"></audio>
         <div class="volume-control-container">
             <label for="volume-control">Volume :</label>
             <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
         </div>
     </header>
-    
+
     <main>
-        <section id="description" class="section-parallax section-1">
+        <section id="description" class="section-parallax">
             <article class="content">
                 <h2>Salut à toi</h2>
                 <p>Je suis un jeune ingénieur en Intelligence Artificielle diplômé de l'ESME Sudria à Paris, passionné par la création de solutions innovantes.</p>
@@ -37,7 +39,7 @@
             </article>
         </section>
 
-        <section id="experience" class="section-parallax section-2">
+        <section id="experience" class="section-parallax">
             <article class="content">
                 <h2>Expérience Professionnelle</h2>
                 <div class="experience">
@@ -67,7 +69,7 @@
             </article>
         </section>
 
-        <section id="education" class="section-parallax section-3">
+        <section id="education" class="section-parallax">
             <article class="content">
                 <h2>Éducation</h2>
                 <div class="education">
@@ -99,7 +101,7 @@
             </article>
         </section>
 
-        <section id="competences" class="section-parallax section-4">
+        <section id="competences" class="section-parallax">
             <article class="content">
                 <h2>Compétences</h2>
                 <ul>
@@ -112,42 +114,50 @@
             </article>
         </section>
 
-        <section id="autres" class="section-parallax section-5">
+        <section id="autres" class="section-parallax">
             <article class="content">
-                <h2>Langues</h2>
-                <ul>
-                    <li>Français</li>
-                    <li>Anglais</li>
-                    <li>Espagnol</li>
-                    <li>Japonais</li>
-                    <li>Italien</li>
-                </ul>
-                <h2>Passions</h2>
-                <ul>
-                    <li>Jeux Vidéo</li>
-                    <li>E-sport</li>
-                    <li>Football</li>
-                    <li>Voyage</li>
-                </ul>
-                <h2>Projets</h2>
-                <ul>
-                    <li>Ce site</li>
-                    <li>Bot Discord</li>
-                    <li>Trieuse de document</li>
-                </ul>
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>Langues</h2/p>
+                        <ul>
+                            <p>Français</p>
+                            <p>Anglais</p>
+                            <p>Espagnol</p>
+                            <p>Japonais</p>
+                            <p>Italien</p>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Passions</h2>
+                        <ul>
+                            <p>Jeux Vidéo</p>
+                            <p>E-sport</p>
+                            <p>Football</p>
+                            <p>Voyage</p>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Projets</h2>
+                        <ul>
+                            <p>Site Internet</p>
+                            <p>Bot Discord</p>
+                            <p>Trieuse de document</p>
+                        </ul>
+                    </div>
+                </div>
             </article>
         </section>
+        
 
-        <section id="contact" class="section-parallax section-6">
+        <section id="contact" class="section-parallax">
             <article class="content">
                 <h2>Contact</h2>
-                <p>Mail : jahedul@hotmail.fr</p>
+                <p>Mail : <a href="mailto:jahedul@hotmail.fr">jahedul@hotmail.fr</a></p>
                 <p>LinkedIn : <a href="https://www.linkedin.com/in/jahedul-bhuiyan/" target="_blank" rel="noopener noreferrer">Jahedul Bhuiyan</a></p>
-                <p>Téléphone : 06.58.40.54.24</p>
+                <p>Téléphone : <a href="tel:+33658405424">06.58.40.54.24</a></p>
             </article>
         </section>
     </main>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sections = document.querySelectorAll('.section-parallax');
