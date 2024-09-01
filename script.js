@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.section-parallax');
+    const navButtons = document.querySelectorAll('.nav-buttons a');
     let currentSection = 0;
     let isScrolling = false;
 
@@ -22,6 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         event.preventDefault(); // Empêche le scroll par défaut
     });
+
+    // Gestion du clic sur les boutons de navigation
+    navButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = event.target.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            currentSection = [...sections].indexOf(targetSection);
+            scrollToSection(currentSection);
+        });
+    });
+
     const audio = document.getElementById('background-music');
     const volumeControl = document.getElementById('volume-control');
 

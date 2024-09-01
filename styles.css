@@ -9,15 +9,14 @@
 
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
     font-family: var(--font-family);
     color: var(--primary-color);
-    background-image: url('/data/para1.jpg');;
+    background-image: url('/data/para1.jpg');
+    background-size : cover;
+    background-position: center;
     overflow: hidden;
     scroll-behavior: smooth;
 }
-
 body {
     display: flex;
     flex-direction: row;
@@ -99,7 +98,7 @@ header p {
     overflow: hidden;
 }
 
-.content::before, .content::after {
+.content::before, .content::after { /* Chaque sphères dans les coins */
     content: "";
     position: absolute;
     border-radius: 50%;
@@ -222,4 +221,24 @@ main {
     margin-bottom: 0.5rem;
     color: var(--primary-color);
     text-align: center;
+}
+
+/* .bouton-cv {
+    padding: 10px 20px;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+} */
+
+.bouton-cv{
+    background-color: #555;
+    color: var(--primary-color);
+    padding: 8px 15px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
