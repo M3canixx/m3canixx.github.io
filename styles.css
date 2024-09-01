@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #fff;
+    --primary-color: #ffffff;
     --background-color: #333;
     --overlay-color: rgba(0, 0, 0, 0.8);
     --border-radius: 20px;
@@ -26,6 +26,7 @@ body {
     height: 100vh; /* Pour que chaque section occupe toute la hauteur de la fenêtre */
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth; /* Le défilement est fluide */
 }
 
 header {
@@ -74,13 +75,14 @@ header p {
 }
 
 .section-parallax {
-    scroll-snap-align: start;
+    scroll-snap-align: start; /* Aligne chaque section avec le début de la vue */
     flex: 0 0 100vw; /* Chaque section occupe 100% de la largeur de la fenêtre */
     height: 100vh; /* Et 100% de la hauteur de la fenêtre */
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .content {
     position: relative;
     background-color: var(--overlay-color);
@@ -190,6 +192,8 @@ main {
     display: flex;
     flex-direction: row;
     width: 100%; /* S'assure que le conteneur principal occupe 100% de la largeur de la fenêtre */
+    scroll-snap-type: x mandatory; /* Le défilement s'arrête au début de chaque section */
+    scroll-behavior: smooth; /* Le défilement est fluide */
 }
 
 .multi-columns {
