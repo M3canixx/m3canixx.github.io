@@ -37,6 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const audio = document.getElementById('background-music');
     const volumeControl = document.getElementById('volume-control');
+    var first=true;
+    window.addEventListener('mousedown',onmousedown);
+
+    function onmousedown(){
+        if(!first) return;
+        first=false;
+        audio.play();
+     }
 
     audio.volume = volumeControl.value;
 
@@ -50,4 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('scroll', playAudio);
+
 });
