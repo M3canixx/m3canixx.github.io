@@ -5,11 +5,17 @@
     --border-radius: 20px;
     --transition-speed: 0.6s;
     --font-family: 'Baloo 2', cursive, sans-serif;
+    --font-size-default: 1.05em; /* Taille de police par défaut */
+    --font-size-header: 2.5em;  /* Taille de police des titres */
+    --font-size-h2: 1.5em;      /* Taille de police pour les sous-titres */
+    --font-size-p: 1.05em;       /* Taille de police pour les paragraphes */
+    --font-size-button: 1em;  /* Taille de police pour les boutons */
 }
 
 html, body {
     height: 100%;
     font-family: var(--font-family);
+    font-size: var(--font-size-default);
     color: var(--primary-color);
     background-image: url('/data/para1.jpg');
     background-size : cover;
@@ -37,6 +43,7 @@ header {
 header h1 {
     font-size: 2.5em;
     margin: 10px 0;
+    font-size: var(--font-size-header); /* Augmentation du titre principal */
 }
 
 header p {
@@ -150,6 +157,10 @@ header p {
 
 h1, h2, th, td {
     font-family: 'Arial', cursive, sans-serif;
+}
+
+h2 {
+    font-size: var(--font-size-h2); /* Augmentation des sous-titres */
 }
 
 a {
@@ -342,8 +353,8 @@ main {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 label {
@@ -359,6 +370,7 @@ input[type="text"], input[type="email"], textarea {
     color: var(--primary-color);
     font-size: 1em;
     font-family: var(--font-family) ;
+    font-size: var(--font-size-p); /* Augmenter la taille des paragraphes, des inputs et du textarea */
 }
 
 textarea {
@@ -370,6 +382,28 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-button[type="submit"] {
-    align-self: center;
+.bouton-cv, button[type="submit"] {
+    font-size: var(--font-size-button); /* Ajuster la taille de police des boutons */
+}
+
+/* Ajustement pour les écrans plus petits (tablettes) */
+@media (max-width: 768px) {
+    :root {
+        --font-size-default: 3vw;
+        --font-size-header: 7vw;
+        --font-size-h2: 5vw;
+        --font-size-p: 2.5vw;
+        --font-size-button: 2.5vw;
+    }
+}
+
+/* Ajustement pour les très petits écrans (smartphones) */
+@media (max-width: 480px) {
+    :root {
+        --font-size-default: 4vw;
+        --font-size-header: 8vw;
+        --font-size-h2: 6vw;
+        --font-size-p: 3vw;
+        --font-size-button: 3vw;
+    }
 }
