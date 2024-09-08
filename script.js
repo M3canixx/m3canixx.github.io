@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSection = 0;
     let isScrolling = false;
 
+    // Fonction pour naviguer entre les sections
     function scrollToSection(index) {
         isScrolling = true;
         sections[index].scrollIntoView({ behavior: 'smooth' });
@@ -12,19 +13,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // Temps pour terminer le scroll
     }
 
-    window.addEventListener('wheel', (event) => {
-        if (!isScrolling) {
-            if (event.deltaY > 0) {
-                currentSection = Math.min(sections.length - 1, currentSection + 1);
+    function updateNavigationButtons() {
+        navButtons.forEach(button => {
+            const targetId = button.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if ([...sections].indexOf(targetSection) === currentSection) {
+                button.classList.add('active'); // Ajoute une classe 'active' pour marquer le bouton actuel
             } else {
+                button.classList.remove('active');
+            }
+        });
+    }
+
+    function navigateSections(direction) {
+        if (!isScrolling) {
+            if (direction === 'next') {
+                currentSection = Math.min(sections.length - 1, currentSection + 1);
+            } else if (direction === 'prev') {
                 currentSection = Math.max(0, currentSection - 1);
             }
             scrollToSection(currentSection);
+            updateNavigationButtons(); // Met à jour les boutons de navigation
         }
+    }
+
+    // Désactiver le scroll à la molette
+    window.addEventListener('wheel', (event) => {
         event.preventDefault(); // Empêche le scroll par défaut
+    }, { passive: false });
+
+    // Gestion des clics sur les zones de navigation gauche et droite
+    document.querySelector('.previous-zone').addEventListener('click', () => {
+        navigateSections('prev');
     });
 
-    // Gestion du clic sur les boutons de navigation
+    document.querySelector('.next-zone').addEventListener('click', () => {
+        navigateSections('next');
+    });
+
+    // Gestion du clic sur les boutons de navigation en haut
     navButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
@@ -32,19 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.getElementById(targetId);
             currentSection = [...sections].indexOf(targetSection);
             scrollToSection(currentSection);
+            updateNavigationButtons(); // Met à jour les boutons de navigation
         });
     });
 
+    // Gestion de l'audio de fond et du contrôle du volume
     const audio = document.getElementById('background-music');
     const volumeControl = document.getElementById('volume-control');
-    var first=true;
-    window.addEventListener('mousedown',onmousedown);
+    let first = true;
 
-    function onmousedown(){
-        if(!first) return;
-        first=false;
-        audio.play();
-     }
+    window.addEventListener('mousedown', () => {
+        if (first) {
+            first = false;
+            audio.play();
+        }
+    });
 
     audio.volume = volumeControl.value;
 
@@ -58,5 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('scroll', playAudio);
-
 });

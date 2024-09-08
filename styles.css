@@ -18,14 +18,9 @@ html, body {
     scroll-behavior: smooth;
 }
 body {
-    display: flex;
-    flex-direction: row;
-    scroll-snap-type: x mandatory;
-    overflow-x: hidden; /* Cache la barre de défilement horizontale */
-    height: 100vh; /* Pour que chaque section occupe toute la hauteur de la fenêtre */
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth; /* Le défilement est fluide */
+    overflow-x: hidden; /* Désactive le défilement horizontal */
 }
 
 header {
@@ -50,6 +45,13 @@ header p {
 }
 
 .nav-buttons {
+    position: fixed; /* Positionne les boutons de navigation par rapport à la fenêtre */
+    bottom: 10px; /* Déplace les boutons vers le bas de la page */
+    left: 50%;
+    transform: translateX(-50%); /* Centre horizontalement les boutons */
+    z-index: 1000; /* S'assure que les boutons sont toujours visibles au-dessus du contenu */
+    display: flex;
+    justify-content: center;
     margin-top: 15px;
 }
 
@@ -79,21 +81,27 @@ header p {
     height: 100vh; /* Et 100% de la hauteur de la fenêtre */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centre le contenu de chaque section horizontalement */
+    padding: 0; /* Supprime le padding pour centrer la section */
+    margin: 0; /* Supprime les marges négatives */
+    position: relative;
 }
 
 .content {
-    position: relative;
-    background-color: var(--overlay-color);
-    padding: 20px 30px;
+    flex: 1; /* Les articles prennent un espace égal */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--overlay-color); /* Arrière-plan pour voir l'effet */
+    margin: 10%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
     border-radius: var(--border-radius);
     border: 3px dashed var(--primary-color);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
-    max-width: 80%;
-    margin: 0 auto;
-    text-align: center;
     color: var(--primary-color);
-    transform: translateY(50px);
+    text-align: center;
+    transform: translateY(0); /* Supprime le décalage vertical initial */
     transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
     overflow: hidden;
 }
@@ -119,7 +127,23 @@ header p {
     right: -50px;
 }
 
-h1, h2, th, td{
+/* Ajustements pour écrans plus petits */
+@media (max-width: 768px) {
+    .article {
+        max-width: 250px;
+        min-height: 350px;
+        margin: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article {
+        max-width: 200px;
+        min-height: 300px;
+    }
+}
+
+h1, h2, th, td {
     font-family: 'Arial', cursive, sans-serif;
 }
 
@@ -190,9 +214,11 @@ label {
 main {
     display: flex;
     flex-direction: row;
-    width: 100%; /* S'assure que le conteneur principal occupe 100% de la largeur de la fenêtre */
+    width: 100vw; /* S'assure que le conteneur principal occupe 100% de la largeur de la fenêtre */
+    height: 100vh; /* S'assure que le conteneur occupe 100% de la hauteur de la fenêtre */
     scroll-snap-type: x mandatory; /* Le défilement s'arrête au début de chaque section */
     scroll-behavior: smooth; /* Le défilement est fluide */
+    overflow-x: hidden; /* Désactive le défilement horizontal supplémentaire */
 }
 
 .multi-columns {
@@ -223,15 +249,6 @@ main {
     text-align: center;
 }
 
-/* .bouton-cv {
-    padding: 10px 20px;
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-} */
-
 .bouton-cv{
     background-color: #555;
     color: var(--primary-color);
@@ -242,3 +259,62 @@ main {
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
+.previous-zone,
+.next-zone {
+    position: fixed;
+    top: 0;
+    width: 10%; /* Largeur de la zone de clic */
+    height: 100vh;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.previous-zone {
+    left: 0;
+}
+
+.next-zone {
+    right: 0;
+}   
+
+.previous-zone::before,
+.next-zone::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Centrer verticalement l'image */
+    width: 40px;  /* Taille de la flèche */
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 11; /* S'assurer que la flèche est bien visible au-dessus */
+}
+
+.previous-zone::before {
+    left: 10px; /* Positionner la flèche vers la gauche */
+    background-image: url('/data/left-arrow.png'); /* Remplacer par le chemin de votre flèche */
+}
+
+.next-zone::before {
+    right: 10px; /* Positionner la flèche vers la droite */
+    background-image: url('/data/right-arrow.png'); /* Remplacer par le chemin de votre flèche */
+}
+
+/* Optionnel : Ajoutez un effet de survol pour indiquer l'interactivité */
+.previous-zone:hover::before,
+.next-zone:hover::before {
+    transform: translateY(-50%) scale(1.1); /* Agrandir légèrement au survol */
+    transition: transform 0.3s ease;
+}
+
+
+/* Ajouter un effet au survol si souhaité */
+.side-zone:hover {
+    background-color: rgba(0, 0, 0, 0.2); /* S'assure que les zones soient visibles au survol */
+}
+
+.nav-buttons a.active {
+    background-color: #777; /* Changement de couleur pour indiquer le bouton actif */
+}
+
