@@ -67,11 +67,11 @@ header p {
 }
 
 .nav-buttons a:hover {
-    background-color: #6F46D0;
+    background-color: violet;
 }
 
 .nav-buttons a.active {
-    background-color: #6F46D0; /* Changement de couleur pour indiquer le bouton actif */
+    background-color: violet; /* Changement de couleur pour indiquer le bouton actif */
 }
 
 
@@ -250,6 +250,8 @@ main {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .column li {
@@ -266,7 +268,7 @@ main {
     }
 }
 
-.bouton-cv{
+.bouton-cv, button[type="submit"] {
     background-color: #555;
     color: var(--primary-color);
     padding: 8px 15px;
@@ -275,6 +277,12 @@ main {
     border-radius: 10px;
     font-weight: bold;
     transition: background-color 0.3s ease;
+    border: none; /* Supprimer les bordures */
+    cursor: pointer; /* Afficher le curseur pointeur */
+}
+
+.bouton-cv:hover, button[type="submit"]:hover {
+    background-color: violet; /* Changer la couleur au survol */
 }
 
 .previous-zone,
@@ -331,3 +339,37 @@ main {
     background-color: rgba(0, 0, 0, 0.2); /* S'assure que les zones soient visibles au survol */
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+label {
+    font-size: 1em;
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--overlay-color);
+    color: var(--primary-color);
+    font-size: 1em;
+    font-family: var(--font-family) ;
+}
+
+textarea {
+    min-height: 150px; /* Définir une taille minimum pour la zone de texte */
+}
+
+input:focus, textarea:focus {
+    border-color: violet;
+    outline: none;
+}
+
+button[type="submit"] {
+    align-self: center;
+}
