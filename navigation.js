@@ -62,29 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNavigationButtons(); // Met à jour les boutons de navigation
         });
     });
-
-    // Gestion de l'audio de fond et du contrôle du volume
-    const audio = document.getElementById('background-music');
-    const volumeControl = document.getElementById('volume-control');
-    let first = true;
-
-    window.addEventListener('mousedown', () => {
-        if (first) {
-            first = false;
-            audio.play();
-        }
-    });
-
-    audio.volume = volumeControl.value;
-
-    volumeControl.addEventListener('input', (event) => {
-        audio.volume = event.target.value;
-    });
-
-    function playAudio() {
-        audio.play().catch(error => console.error('Autoplay failed:', error));
-        document.removeEventListener('scroll', playAudio);
-    }
-
-    document.addEventListener('scroll', playAudio);
 });

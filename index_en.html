@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de BHUIYAN Jahedul, Ingénieur en Intelligence Artificielle.">
+    <title>Portfolio - BHUIYAN Jahedul</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<div class="side-zone previous-zone"></div>
+<div class="side-zone next-zone"></div>
+
+<body>
+    <header>
+        <h1 id="header-name">BHUIYAN Jahedul</h1>
+        <p id="header-subtitle">Artificial Intelligence Engineer</p>
+        <nav>
+            <div class="nav-buttons">
+                <a href="#description" id="nav-description">Description</a>
+                <a href="#experience" id="nav-experience">Experience</a>
+                <a href="#education" id="nav-education">Education</a>
+                <a href="#skills" id="nav-competences">Skills</a>
+                <a href="#hobbies" id="nav-loisirs">Hobbies</a>
+                <a href="#contact" id="nav-contact">Contact</a>
+            </div>
+        </nav>
+        <audio autoplay loop id="background-music" src="/data/solution-nine.mp3"></audio>
+        <div class="volume-control-container">
+            <label for="volume-control">Volume :</label>
+            <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
+            <button id="language-toggle" class="language-button" onclick="switchLanguage()">
+                <img id="flag" src="data/fr_flag.png" alt="Changer de langue">
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="description" class="section-parallax">
+            <article class="content">
+                <h2>Welcome</h2>
+                <p>I am an Artificial Intelligence engineer graduated from ESME Sudria in Paris, passionate about new technologies and innovation.</p>
+                <p>My goal is to enrich my skills through diverse and stimulating experiences.</p>
+                <p>Currently seeking my first full-time job in the data field, I am ready to take on new technical challenges and contribute to innovative projects.</p>
+                <p>Feel free to contact me! My contact details are waiting for you at the end of this interactive journey.</p>
+            </article>
+        </section>
+
+        <section id="experience" class="section-parallax">
+            <article class="content">
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>End-of-Studies Internship - ALTEN</h2>
+                        <em class="location-date">Sèvres | January 2023 - July 2023</em>
+                        <p>CIFRE thesis between ALTEN and CentraleSupélec :</p>
+                        <ul>
+                            <li>Immersive behavioral analysis: Study of human interactions in virtual environments with a focus on deep learning and NLP.</li>
+                            <li>Research and development: State of the art on transformers in cross-modality.</li>
+                            <li>Algorithm design: Python development with PyTorch for behavioral data analysis on audio, text, and vision.</li>
+                            <li>Data management: Collection, processing, and creation of a dataset for emotion prediction (valence-arousal).</li>
+                            <li>Tools and technologies: BitVise, GitHub, Microsoft Azure, Visual Studio Code.</li>
+                            <li>Skills acquired: Python, NLP, transformers, deep learning, PyTorch, Bash.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Internship - Wel2Be</h2>
+                        <em class="location-date">Rennes | April 2022 – July 2022</em>
+                        <p>Development of a tool for recognizing signs of consciousness in poultry at the slaughterhouse :</p>
+                        <ul>
+                            <li>Animal welfare: Improving practices in slaughterhouses by detecting signs of consciousness.</li>
+                            <li>Data collection and processing: Recording and labeling site videos, with processing using FFmpeg.</li>
+                            <li>Algorithm design: Development in Python using OpenCV for image analysis and TensorFlow/Keras for deep learning.</li>
+                            <li>Tools and technologies: GitHub for version control, Visual Studio Code for development.</li>
+                            <li>Skills acquired: Image analysis, Python, TensorFlow, Keras, OpenCV, image processing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="education" class="section-parallax">
+            <article class="content">
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>AI Engineer Degree - ESME Sudria</h2>
+                        <em class="location-date">Ivry-Sur-Seine | 2019 - 2022</em>
+                        <ul>
+                            <li>Real-time face recognition: Development of a facial recognition solution with UI using Deep Learning, Python, and OpenCV. <a href="https://github.com/M3canixx/face-recognition-cnn" target="_blank" rel="noopener noreferrer">[See project]</a></li>
+                            <li>Emotion recognition through facial expression: Creating a Deep Learning model to identify emotions from facial expressions using Python and OpenCV.<a href="https://github.com/M3canixx/Facial-Expression-Recognition-using-VGG" target="_blank" rel="noopener noreferrer">[See project]</a></li>
+                            <li>Spell-checker: Tool for detecting spelling errors on social networks via Web Scraping using Selenium in Python and JavaScript.<a href="https://github.com/M3canixx/Le_denonceur_de_dechet-inator" target="_blank" rel="noopener noreferrer">[See project]</a></li>
+                            <li>Pharmaceutical stock management application: Java development for tracking and managing medication stocks.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>SInternational Semester - Prague College</h2>
+                        <em class="location-date">Prague | 2020 - 2021</em>
+                        <ul>
+                            <li>Python Game : 3D Tic-Tac-Toe with advance Python coding.</li>
+                            <li>Graphs Therory : Dijkstra's Algorithm to optimise route between europeens train station.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>CPGE TSI - Lycée Le Corbusier</h2>
+                        <em class="location-date">Aubervilliers | 2017 - 2019</em>
+                        <ul>
+                            <li>Classe Préparatoire TSI (Technologie et Science de l'Industrie)</li>
+                            <li>TIPE : Creation of a Scooter Park</li>
+                        </ul>
+                </div>
+            </article>
+        </section>
+
+        <section id="skills" class="section-parallax">
+            <article class="content">
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>Programming language</h2>
+                        <ul>
+                            <li>Python      ★★★★</li>
+                            <li>JavaScript  ★★★</li>
+                            <li>C++          ★★</li>
+                            <li>C#          ★★</li>
+                            <li>Java        ★★</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Purview</h2>
+                        <ul>
+                            <li>Machine Learning</li>
+                            <li>Deep Learning</li>
+                            <li>Web Scraping</li>
+                            <li>Big Data</li>
+                            <li>Computer Vision</li>
+                            <li>Computer Graphics</li>
+                            <li>NLP</li>
+                            <li>DevOps</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Frameworks</h2>
+                        <ul>
+                            <li>TensorFlow</li>
+                            <li>Keras</li>
+                            <li>PyTorch</li>
+                            <li>OpenCV</li>
+                            <li>Scikit-Learn</li>
+                            <li>Pandas</li>
+                            <li>Scipy</li>
+                            <li>Seaborn</li>
+                            <li>Matplotlib</li>
+                            <li>NodeJS</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Development tools</h2>
+                        <ul>
+                            <li>BitVise</li>
+                            <li>GitHub</li>
+                            <li>MS Visual Studio</li>
+                            <li>Visual Studio Code</li>
+                            <li>MATLAB</li>
+                            <li>SolidWorks</li>
+                            <li>Unity</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Technologies Cloud</h2>
+                        <ul>
+                            <li>Microsoft Azure</li>
+                            <li>AWS</li>
+                            <li>Docker</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Certification</h2>
+                        <ul>
+                            <li>Certification : Huawei HCIA-AI V3.0 (Artificial Intelligence)</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="hobbies" class="section-parallax">
+            <article class="content">
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>🌍 Language</h2>
+                        <ul>
+                            <li>French      ★★★★</li>
+                            <li>English     ★★★</li>
+                            <li>Spanish     ★★</li>
+                            <li>Japanese    ★★</li>
+                            <li>Italian     ★</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>🎮 Passions</h2>
+                        <ul>
+                            <li>Video Games</li>
+                            <li>E-sport</li>
+                            <li>Football</li>
+                            <li>Climbing</li>
+                            <li>Travel</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>💻 Projets</h2>
+                        <ul>
+                            <li>Fall detection bracelet: Development with Arduino and creation of a web interface.</li>
+                            <li>Document sorter: Application in JavaScript using the Ramda library.</li>
+                            <li>VR interaction: Development in C# with Unity, including controller programming for virtual reality experiences.</li>
+                            <li>Online portfolio: Design of an online portfolio using HTML, CSS, and JavaScript.</li>
+                            <li>Discord bot: Creation of a bot for Discord in JavaScript.</li>
+                            <li>3D animation: Modeling and animation with Blender.</li>
+                            <li>3D modeling: Design and modeling of parts and assemblies using Solidworks.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="contact" class="section-parallax">
+            <article class="content">
+                <div class="multi-columns">
+                    <div class="column">
+                        <h2>Contact</h2>
+                        <ul>
+                            <p>Mail : <a href="mailto:jahedul@hotmail.fr">jahedul@hotmail.fr</a></p>
+                            <p>LinkedIn : <a href="https://www.linkedin.com/in/jahedul-bhuiyan/" target="_blank">Jahedul Bhuiyan</a></p>
+                            <p>Phone Number : <a href="tel:0658405424">+33.06.58.40.54.24</a></p>
+                            <p><a href="/data/CV.pdf" download="CV_BHUIYAN_Jahedul.pdf" target="_blank"><button class="bouton-cv">Download CV</button></a></p>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h2>Send me a message</h2>
+                        <form action="https://formspree.io/f/mgvwqqol" method="POST">
+                            <label for="name">Name :</label>
+                            <input type="text" id="name" name="name" required>
+                            
+                            <label for="email">Email :</label>
+                            <input type="email" id="email" name="email" required>
+                            
+                            <label for="message">Message :</label>
+                            <textarea id="message" name="message" rows="7" cols="100" required></textarea>
+
+                            <button type="submit" class="bouton-cv">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="navigation.js"></script>
+    <script src="langage.js"></script>
+    <script src="audio.js"></script>
+</body>
+
+</html>

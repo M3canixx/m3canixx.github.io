@@ -13,24 +13,29 @@
 <div class="side-zone previous-zone"></div>
 <div class="side-zone next-zone"></div>
 
+
+
 <body>
     <header>
-        <h1>BHUIYAN Jahedul</h1>
-        <p>Ingénieur en Intelligence Artificielle</p>
+        <h1 id="header-name">BHUIYAN Jahedul</h1>
+        <p id="header-subtitle">Ingénieur en Intelligence Artificielle</p>
         <nav>
             <div class="nav-buttons">
-                <a href="#description">Description</a>
-                <a href="#experience">Expérience</a>
-                <a href="#education">Éducation</a>
-                <a href="#competences">Compétences</a>
-                <a href="#loisirs">Loisirs</a>
-                <a href="#contact">Contact</a>
+                <a href="#description" id="nav-description">Description</a>
+                <a href="#experience" id="nav-experience">Expérience</a>
+                <a href="#education" id="nav-education">Éducation</a>
+                <a href="#skills" id="nav-competences">Compétences</a>
+                <a href="#hobbies" id="nav-loisirs">Loisirs</a>
+                <a href="#contact" id="nav-contact">Contact</a>
             </div>
         </nav>
         <audio autoplay loop id="background-music" src="/data/solution-nine.mp3"></audio>
         <div class="volume-control-container">
             <label for="volume-control">Volume :</label>
             <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.1">
+            <button id="language-toggle" class="language-button" onclick="switchLanguage()">
+                <img id="flag" src="data/uk_flag.png" alt="Changer de langue">
+            </button>
         </div>
     </header>
 
@@ -109,11 +114,11 @@
             </article>
         </section>
 
-        <section id="competences" class="section-parallax">
+        <section id="skills" class="section-parallax">
             <article class="content">
                 <div class="multi-columns">
                     <div class="column">
-                        <h2>Langues de progamations</h2>
+                        <h2>Langage de programmation</h2>
                         <ul>
                             <li>Python      ★★★★</li>
                             <li>JavaScript  ★★★</li>
@@ -180,7 +185,7 @@
             </article>
         </section>
 
-        <section id="loisirs" class="section-parallax">
+        <section id="hobbies" class="section-parallax">
             <article class="content">
                 <div class="multi-columns">
                     <div class="column">
@@ -218,6 +223,7 @@
                 </div>
             </article>
         </section>
+        
 
         <section id="contact" class="section-parallax">
             <article class="content">
@@ -251,7 +257,9 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+    <script src="langage.js"></script>
+    <script src="audio.js"></script>
 </body>
 
 </html>

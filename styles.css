@@ -407,3 +407,14 @@ input:focus, textarea:focus {
         --font-size-button: 3vw;
     }
 }
+
+.language-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.language-button img {
+    width: 30px;
+    height: auto;
+}
