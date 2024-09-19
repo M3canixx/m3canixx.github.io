@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const lang = urlParams.get('lang');
 
     // Si 'lang' est 'en', redirige vers la version anglaise
+    if (lang === 'fr') {
+        window.location.href = 'index_fr.html';
+    }
     if (lang === 'en') {
         window.location.href = 'index_en.html';
     }
