@@ -16,3 +16,13 @@ function switchLanguage() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang');
+
+    // Si 'lang' est 'en', redirige vers la version anglaise
+    if (lang === 'en') {
+        window.location.href = 'index_en.html';
+    }
+});
+
