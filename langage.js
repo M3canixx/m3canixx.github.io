@@ -270,8 +270,8 @@ const translations = {
             {
                 title: "🌍 Languages",
                 items: [
-                    "French ★★★★",
-                    "English ★★★",
+                    "French ★★★★★",
+                    "English ★★★★",
                     "Spanish ★★",
                     "Japanese ★★",
                     "Italian ★"
@@ -469,8 +469,8 @@ const translations = {
             {
                 title: "🌍 Langues",
                 items: [
-                    "Français ★★★★",
-                    "Anglais ★★★",
+                    "Français ★★★★★",
+                    "Anglais ★★★★",
                     "Espagnol ★★",
                     "Japonais ★★",
                     "Italien ★"
