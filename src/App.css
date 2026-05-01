@@ -401,6 +401,7 @@
   color: #e5e7eb;
   line-height: 1.75;
   font-size: 1.125rem;
+  text-align: justify;
 }
 
 /* ===================================
@@ -867,6 +868,33 @@
   color: #e5e7eb;
   margin-bottom: 1.5rem;
   line-height: 1.75;
+}
+
+.desc-block {
+  margin-bottom: 0.75rem;
+}
+
+.desc-bullets {
+  list-style: none;
+  margin-top: 0.4rem;
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.desc-bullets li {
+  position: relative;
+  padding-left: 1.25rem;
+  color: #d8b4fe;
+  font-size: 0.95rem;
+}
+
+.desc-bullets li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: #a855f7;
 }
 
 .project-tags {
