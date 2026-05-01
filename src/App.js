@@ -172,7 +172,7 @@ const projets = [
     nom: "Portfolio Internet",
     description: "Conception d'un portfolio en ligne",
     technologies: ["HTML", "React"],
-    github : "https://github.com/M3canixx/portfolio"
+    github : "https://m3canixx.github.io/"
   },
   {
     nom: "Bot Discord",
@@ -183,7 +183,7 @@ const projets = [
     nom: "YGODoku",
     description: "Jeu de Sudoku développé en JavaScript",
     technologies: ["JavaScript", "HTML", "CSS"],
-    github : "https://github.com/M3canixx/YGOdoku"
+    github : "https://m3canixx.github.io/YGOdoku/"
   },
 ];
 
