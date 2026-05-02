@@ -11,7 +11,7 @@ const profile = {
   localisation: "Pantin, France",
   linkedin: "https://linkedin.com/in/jahedul-bhuiyan",
   github: "https://github.com/m3canixx",
-  description: "Étant passionné par la technologies et les jeux-vidéos depuis de nombreuses années, je me suis naturellement dirigé vers des études en mathématiques et informatique. En intégrant l'ESME Sudria, j'ai pu me spécialiser en intelligence artificielle et computer vision, domaines qui me fascinent par leur potentiel. Aujourd’hui, je souhaite continuer à approfondir ces sujets et contribuer au développement de solutions innovantes basées sur l'intelligence artificielle. Aurjoud’hui, je suis à la recherche d’un poste d’ingénieur Computer Vision, idéalement en CDI en Île-de-France ou en télétravail hybride."
+  description: "Étant passionné par la technologies et les jeux-vidéos depuis de nombreuses années, je me suis naturellement dirigé vers des études en mathématiques et informatique. En intégrant l'ESME Sudria, j'ai pu me spécialiser en intelligence artificielle et computer vision, domaines qui me fascinent par leur potentiel. Aujourd’hui, je souhaite continuer à approfondir ces sujets et contribuer au développement de solutions innovantes basées sur l'intelligence artificielle. Je recherche un poste d’ingénieur Computer Vision, idéalement en CDI en Île-de-France ou en télétravail hybride."
 };
 
 const navItems = [
