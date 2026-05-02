@@ -1,473 +1,410 @@
-import React, { useState } from 'react';
-import { Mail, Linkedin, Github, Briefcase, GraduationCap, Award, Code, Download, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
+import imgYgodoku from './assets/YGOdoku.png';
+import imgDiscord from './assets/Discord.png';
 
-// Données à personnaliser
 const profile = {
   nom: "Jahedul BHUIYAN",
-  titre: "Ingénieur Computer Vision",
+  titre: "Ingénieur IA & Computer Vision",
   email: "jahedul@hotmail.fr",
   telephone: "+33 6 58 40 54 24",
   localisation: "Pantin, France",
-  linkedin: "linkedin.com/in/jahedul-bhuiyan",
-  github: "github.com/m3canixx",
-  description: "Ingénieur Computer Vision diplômé de l'ESME Sudria, spécialisé en deep learning temps réel, traitement d'images et IA générative. Expérience en R&D industrielle (ALTEN, Wel2Be) et en développement de SDK temps réel (animation faciale, avatars 3D). Trilingue technique : PyTorch, TensorFlow, OpenCV. Recherche un CDI en Île-de-France ou en télétravail hybride pour rejoindre une équipe IA produit ambitieuse."
+  linkedin: "https://linkedin.com/in/jahedul-bhuiyan",
+  github: "https://github.com/m3canixx",
+  description: "Étant passionné par la technologies et les jeux-vidéos depuis de nombreuses années, je me suis naturellement dirigé vers des études en mathématiques et informatique. En intégrant l'ESME Sudria, j'ai pu me spécialiser en intelligence artificielle et computer vision, domaines qui me fascinent par leur potentiel. Aujourd’hui, je souhaite continuer à approfondir ces sujets et contribuer au développement de solutions innovantes basées sur l'intelligence artificielle. Aurjoud’hui, je suis à la recherche d’un poste d’ingénieur Computer Vision, idéalement en CDI en Île-de-France ou en télétravail hybride."
 };
+
+const navItems = [
+  { id: 'experiences', label: 'Expériences' },
+  { id: 'formations', label: 'Formations' },
+  { id: 'competences', label: 'Compétences' },
+  { id: 'projets', label: 'Projets' },
+  { id: 'autres', label: 'Autres' },
+  { id: 'contact', label: 'Contact' },
+];
+
+const competences = {
+  "Langages": ["Python", "JavaScript", "React", "C++", "C#", "Java", "SQL"],
+  "IA & ML": ["Computer Vision", "NLP", "GenAI", "Transformers", "PyTorch", "TensorFlow", "Keras"],
+  "Vision": ["OpenCV", "YOLO", "FFMPEG", "Optical Flow"],
+  "Cloud & DevOps": ["AWS", "Azure", "Docker", "Git", "CI/CD", "n8n"],
+  "Data & BI": ["Pandas", "NumPy", "Scikit-learn", "PySpark", "Snowflake", "MongoDB", "PowerBI"],
+  "SoftSkills": ["Adaptabilité", "Curiosité", "Polyvalence", "Esprit d'équipe"],
+  "Centres d'intérêt": ["Voyage", "Escalade", "Esport", "Cuisine"],
+  "Langues": ["Français (natif)", "Anglais (IELTS 6.5 / TOEIC 815)"],
+};
+
+const formations = [
+  {
+    diplome: "Diplôme d'Ingénieur — Intelligence Artificielle",
+    ecole: "ESME Sudria",
+    periode: "2019 – 2022",
+    details: ["Reconnaissance faciale temps réel (CNN)", "Détection d'émotions (TensorFlow)", "Web scraping & ML (Selenium)"]
+  },
+  {
+    diplome: "Semestre International",
+    ecole: "Prague College",
+    periode: "2020 – 2021",
+    details: ["Théorie des graphes (Dijkstra)", "Programmation graphique Python"]
+  },
+  {
+    diplome: "Certification AWS AI Educate — Data Science & ML Engineering",
+    ecole: "Amazon Web Services",
+    periode: "Juin – Juillet 2025",
+    details: []
+  },
+  {
+    diplome: "Certification HCIA-AI V3.0",
+    ecole: "Huawei",
+    periode: "Avril 2022",
+    details: []
+  },
+];
 
 const experiences = [
   {
     poste: "Ingénieur Computer Vision",
     entreprise: "Freelance",
-    periode: "2025 - Présent",
-    description: [
-      {
-        text: "Amélioration d'un SDK de génération d'avatars 3D (Ready Player Me) : optimisation du pipeline d'animation faciale temps réel via webcam.",
-        bullets: [
-          "Optimisation du SDK : réduction de la latence de 70%.",
-          "Mise en place d'un tracking de la tête et du visage en temps réel.",
-        ]
-      },
-      {
-        text: "Développement d'agents IA multimodaux pour analyse et génération de contenu (LLM).",
-        bullets: [
-          "Scraping de données web et intégration dans des workflows d'automatisation (n8n).",
-        ]
-      }
+    periode: "2025 – Présent",
+    points: [
+      "Optimisation du pipeline d'animation faciale temps réel — réduction de la latence de 70%",
+      "Tracking tête/visage en temps réel via webcam (SDK Ready Player Me)",
+      "Développement d'agents IA multimodaux (LLM, scraping, n8n)",
     ],
-    technologies: ["Python", "OpenCV", "Web Scrapping", "GenAI", "Flutter"]
+    technologies: ["Python", "OpenCV", "GenAI", "Flutter", "n8n"]
   },
   {
     poste: "Ingénieur Computer Vision Junior",
     entreprise: "ALTEN",
-    periode: "Janvier 2023 - Juillet 2023",
-    description: [
-      {
-        text: "Recherche CIFRE sur les interactions humaines en conduite simulée (VR)",
-        bullets: [
-          "Conception d'un protocole expérimental multimodal (audio, texte, vision).",
-          "Création d'un dataset multimodal annoté pour la prédiction d'émotions du conducteur. Dataset : IEMOCAP, MSP Podcast, CMU-MOSEI.",
-          "Développement et entraînement de modèles Deep Learning / NLP (Transformers, fusion multimodale). MSE : 0.048, CCC : 0.970."
-        ]
-      },
+    periode: "Janvier 2023 – Juillet 2023",
+    points: [
+      "Recherche CIFRE sur les interactions humaines en conduite simulée (VR)",
+      "Protocole expérimental multimodal (audio, texte, vision)",
+      "Modèles Deep Learning / NLP — MSE : 0.048 | CCC : 0.970",
     ],
-    technologies: ["GitHub", "Azure", "Python", "PyTorch", "Bash"]
+    technologies: ["PyTorch", "Azure", "Python", "Bash", "GitHub"]
   },
   {
     poste: "Ingénieur Computer Vision Junior",
     entreprise: "Wel2Be",
-    periode: "Avril 2022 - Juillet 2022",
-    description: [
-      {
-        text: "Développement d'un outil de reconnaissance des signes de conscience chez la volaille en abattoir.",
-        bullets: [
-          "Analyse vidéo en environnement industriel pour le suivi du bien-être animal (élevage, conformité réglementaire).",
-          "Création d'un dataset annoté de vidéos d'abattoirs pour entraîner des modèles de vision par ordinateur. Dataset : 10 000 annotations de vidéos.",
-          "Développement d'algorithmes de détection et de tracking temps réel (Python, OpenCV). Acuracy : 96%, FPS : 50.",
-          "Mise en place d'un prototype de contrôle qualité pour audit réglementaire client."
-        ]
-      }
+    periode: "Avril 2022 – Juillet 2022",
+    points: [
+      "Détection de signes de conscience chez la volaille en abattoir",
+      "Dataset annoté de 10 000 vidéos industrielles",
+      "Détection & tracking temps réel — Accuracy : 96% | 50 FPS",
     ],
-    technologies: ["Python", "TensorFlow", "Keras", "OpenCV"]
-  }
+    technologies: ["TensorFlow", "Keras", "OpenCV", "Python"]
+  },
 ];
-
-const formations = [
-  {
-    diplome: "Diplôme d'ingénieur en Intelligence Artificielle — ESME Sudria",
-    ecole: "ESME Sudria",
-    periode: "2019 - 2022",
-    details: [
-      {
-        text: "Projets académiques en Computer Vision et Intelligence Artificielle :",
-        bullets: [
-          "Reconnaissance faciale temps réel (Python, Keras, CNN).",
-          "Détection d'émotions (TensorFlow).",
-          "Détection de fautes textuelles via web scraping (Selenium, ML)."
-        ]
-      }
-    ],
-  },
-  {
-    diplome: "Semestre International",
-    ecole: "Prague College",
-    periode: "2020 - 2021",
-    details: [
-      {
-        text: "Formation générale en informatique et programmation :",
-        bullets: [
-          "Études de la théorie des graphes (Dijkstra).",
-          "Études de la programmation graphique (Python).",
-        ]
-      }
-    ],
-  },
-  {
-    diplome: "Certification AWS AI Educate — Data Science, ML Engineering",
-    ecole: "",
-    periode: "Juin - Juillet 2025",
-    details: ""
-  },
-  {
-    diplome: "Certification Huawei HCIA-AI V3.0 — Intelligence Artificielle",
-    ecole: "",
-    periode: "Avril 2022",
-    details: ""
-  }
-];
-
-const competences = {
-  langage: ["Python", "Javascript", "React", "SQL", "C++", "C#", "Java"],
-  ai: ["Computer Vision", "NLP", "GenAI", "Transformers", "Pytorch", "TensorFlow", "Keras"],
-  vision: ["OpenCV", "YOLO", "FFMPEG", "Optical Flow", "Dataset labeling", "Data augmentation"],
-  cloud: ["AWS ", "Azure", "Docker", "Git", "CI/CD", "n8n"],
-  data: ["Pandas", "NumPy", "Scikit-learn", "PySpark", "Snowflake", "MongoDB", "NoSQL", "PowerBi"],
-};
 
 const projets = [
   {
-    nom: "Reconnaissance de visage en temps réel",
-    description: "Développement d'une solution de reconnaissance faciale avec IHM.",
-    technologies: ["Tensorflow", "Python", "OpenCV"],
-    github : "https://github.com/M3canixx/face-recognition-cnn"
+    nom: "Reconnaissance faciale temps réel",
+    description: "Développement d'une solution complète de reconnaissance faciale en temps réel avec interface graphique. Le système détecte et identifie des visages via webcam à l'aide d'un CNN entraîné sur des données personnalisées.",
+    technologies: ["TensorFlow", "Python", "OpenCV"],
+    github: "https://github.com/M3canixx/face-recognition-cnn",
+    image: null
   },
   {
-    nom: "Reconnaissance d'émotions par expression faciale",
-    description: "Création d'un modèle de Deep Learning pour identifier les émotions à partir des expressions faciales",
-    technologies: ["Python", "OpenCV"],
-    github : "https://github.com/M3canixx/Facial-Expression-Recognition-using-AlexNet"
+    nom: "Reconnaissance d'émotions faciales",
+    description: "Création d'un modèle de Deep Learning basé sur AlexNet pour identifier les émotions à partir des expressions faciales. Entraîné sur des datasets publics (FER2013), le modèle classifie 7 émotions en temps réel.",
+    technologies: ["Python", "OpenCV", "Keras"],
+    github: "https://github.com/M3canixx/Facial-Expression-Recognition-using-AlexNet",
+    image: null
   },
   {
     nom: "Détecteur de fautes d'orthographe",
-    description: "Outil de détection des fautes sur les réseaux sociaux",
-    technologies: ["Web Scraping", "Selenium", "Python", "JavaScript"],
-    github : "https://github.com/M3canixx/Le_denonceur_de_dechet-inator"
-  },
-  {
-    nom: "Morpion en 3D",
-    description: "Jeu de morpion développé en 3D",
-    technologies: ["Python", "Pygame"]
-  },
-  {
-    nom: "Théorie des graphes",
-    description: "Algorithme de Dijkstra pour optimiser les trajets entre gares européennes",
-    technologies: ["Clojure"]
-  },
-  {
-    nom: "Application de gestion des stocks pharmaceutiques",
-    description: "Développement d'une application pour le suivi et la gestion des stocks de médicaments",
-    technologies: ["Java", "SQL"]
-  },
-  {
-    nom: "Bracelet détecteur de chute",
-    description: "Développement d'un bracelet intelligent pour cyclistes détectant les chutes et alertant les contacts d'urgence",
-    technologies: ["C", "SQL", "Arduino"]
-  },
-  {
-    nom: "Trieuse de documents",
-    description: "Système de tri automatique de documents",
-    technologies: ["Javascript", "NodeJS"],
-    github : "https://github.com/M3canixx/quick_rename_pic"
-  },
-  {
-    nom: "Portfolio Internet",
-    description: "Conception d'un portfolio en ligne",
-    technologies: ["HTML", "React"],
-    github : "https://m3canixx.github.io/"
-  },
-  {
-    nom: "Bot Discord",
-    description: "Création d'un bot pour Discord",
-    technologies: ["JavaScript", "NodeJS", "Discord.js"]
+    description: "Outil de détection automatique des fautes d'orthographe sur les réseaux sociaux. Utilise le web scraping pour collecter des posts et un modèle ML pour identifier les erreurs linguistiques.",
+    technologies: ["Selenium", "Python", "JavaScript"],
+    github: "https://github.com/M3canixx/Le_denonceur_de_dechet-inator",
+    image: null
   },
   {
     nom: "YGODoku",
-    description: "Jeu de Sudoku développé en JavaScript",
+    description: "Jeu du Sudoku sur la thématique Yu-Gi-Oh entièrement développé en JavaScript. Interface jouable en ligne avec génération de grilles aléatoires et système de validation.",
     technologies: ["JavaScript", "HTML", "CSS"],
-    github : "https://m3canixx.github.io/YGOdoku/"
+    github: "https://m3canixx.github.io/YGOdoku/",
+    image: imgYgodoku
+  },
+  {
+    nom: "Morpion 3D",
+    description: "Jeu de morpion développé en trois dimensions avec Pygame. Les joueurs s'affrontent sur une grille 3D avec détection automatique des victoires dans les 8 directions.",
+    technologies: ["Python", "Pygame"],
+    github: null,
+    image: null
+  },
+  {
+    nom: "Théorie des graphes",
+    description: "Implémentation de l'algorithme de Dijkstra en Clojure pour calculer les trajets optimaux entre les principales gares européennes, avec visualisation du chemin le plus court.",
+    technologies: ["Clojure"],
+    github: null,
+    image: null
+  },
+  {
+    nom: "Bracelet détecteur de chute",
+    description: "Bracelet intelligent embarqué sur Arduino pour cyclistes. Détecte les chutes via accéléromètre, enregistre l'événement en base de données et alerte automatiquement les contacts d'urgence.",
+    technologies: ["C", "SQL", "Arduino"],
+    github: null,
+    image: null
+  },
+  {
+    nom: "Trieuse de documents",
+    description: "Système de tri et renommage automatique de documents et images. Analyse le contenu des fichiers et les classe intelligemment selon des règles configurables via une interface Node.js.",
+    technologies: ["JavaScript", "NodeJS"],
+    github: "https://github.com/M3canixx/quick_rename_pic",
+    image: null
+  },
+  {
+    nom: "Bot Discord",
+    description: "Bot Discord multifonction avec commandes personnalisées, gestion des rôles, réponses automatiques et intégration d'APIs externes pour enrichir l'expérience des serveurs.",
+    technologies: ["JavaScript", "NodeJS", "Discord.js"],
+    github: null,
+    image: imgDiscord
   },
 ];
 
-function renderDescription(description) {
-  if (typeof description === "string") {
-    return <p className="card-description">{description}</p>;
-  }
+function useInView(ref, threshold = 0.15) {
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setInView(true);
+    }, { threshold });
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [ref, threshold]);
+  return inView;
+}
 
+function AnimSection({ id, children, className = '' }) {
+  const ref = useRef(null);
+  const visible = useInView(ref);
   return (
-    <div className="card-description">
-      {description.map((block, i) => (
-        <div key={i} className={i < description.length - 1 ? "desc-block" : ""}>
-          <p>{block.text}</p>
-          {block.bullets && (
-            <ul className="desc-bullets">
-              {block.bullets.map((b, j) => (
-                <li key={j}>{b}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
-    </div>
+    <section id={id} ref={ref} className={`anim-section ${visible ? 'visible' : ''} ${className}`}>
+      {children}
+    </section>
   );
 }
 
-function App() {
-  const [activeSection, setActiveSection] = useState('experience');
-  const [hoveredCard, setHoveredCard] = useState(null);
+export default function App() {
+  const [activeNav, setActiveNav] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const sections = navItems.map(n => document.getElementById(n.id));
+      let current = '';
+      sections.forEach(s => {
+        if (s && window.scrollY >= s.offsetTop - 200) current = s.id;
+      });
+      setActiveNav(current);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
+  };
 
   return (
-    <div className="app-container">
-      {/* Animated background elements */}
-      <div className="background-animation">
-        <div className="bubble bubble-1"></div>
-        <div className="bubble bubble-2"></div>
-        <div className="bubble bubble-3"></div>
-      </div>
-
-      {/* Header */}
+    <div className="app">
+      {/* ── HEADER / NAV ── */}
       <header className="header">
-        <div className="header-content">
-          <div className="header-main">
-            <div className="header-text">
-              <div className="portfolio-badge">
-                <span>Portfolio</span>
-              </div>
-              <h1 className="header-title">{profile.nom}</h1>
-              <p className="header-subtitle">{profile.titre}</p>
-
-              <div className="contact-links">
-                <a href={`mailto:${profile.email}`} className="contact-link">
-                  <Mail size={16} />
-                  <span>{profile.email}</span>
-                </a>
-                <a href={`https://${profile.linkedin}`} target="_blank" rel="noopener noreferrer" className="contact-link">
-                  <Linkedin size={16} />
-                  <span>LinkedIn</span>
-                </a>
-                <a href={`https://${profile.github}`} target="_blank" rel="noopener noreferrer" className="contact-link">
-                  <Github size={16} />
-                  <span>GitHub</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="header-actions">
-              <button className="download-btn">
-                <span className="download-btn-content">
-                  <Download size={20} />
-                  Télécharger CV
-                </span>
-                <div className="download-btn-overlay"></div>
-              </button>
-            </div>
-          </div>
-        </div>
+        <a href="#top" className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          JB<span className="logo-dot">.</span>
+        </a>
+        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+          {navItems.map(n => (
+            <button key={n.id} className={`nav-link ${activeNav === n.id ? 'active' : ''}`} onClick={() => scrollTo(n.id)}>
+              {n.label}
+            </button>
+          ))}
+        </nav>
+        <button className="burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          <span /><span /><span />
+        </button>
       </header>
 
-      {/* Navigation */}
-      <nav className="navigation">
-        <div className="nav-content">
-          <div className="nav-buttons">
-            {[
-              { id: 'experience', icon: Briefcase, label: 'Expérience' },
-              { id: 'formation', icon: GraduationCap, label: 'Formation' },
-              { id: 'competences', icon: Code, label: 'Compétences' },
-              { id: 'projets', icon: Award, label: 'Projets' }
-            ].map((section) => {
-              const Icon = section.icon;
-              return (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  className={`nav-button ${activeSection === section.id ? 'active' : ''}`}
-                >
-                  <div className="nav-button-inner">
-                    <Icon size={18} />
-                    <span>{section.label}</span>
-                  </div>
-                  {activeSection === section.id && <div className="nav-indicator"></div>}
-                </button>
-              );
-            })}
+      {/* ── HERO ── */}
+      <section className="hero" id="top">
+        <div className="hero-noise" />
+        <div className="hero-grid" />
+        <div className="hero-blob blob-1" />
+        <div className="hero-blob blob-2" />
+        <div className="hero-content">
+          <p className="hero-eyebrow">Bonjour et bienvenue, je suis</p>
+          <h1 className="hero-name">{profile.nom}</h1>
+          <h2 className="hero-title">{profile.titre}</h2>
+          <p className="hero-desc">{profile.description}</p>
+          <div className="hero-actions">
+            <button className="btn-primary" onClick={() => scrollTo('contact')}>Me contacter</button>
+            <a className="btn-ghost" href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
+            <a className="btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <a className="btn-ghost" href={`mailto:${profile.email}`} target="_blank" rel="noreferrer">Email</a>
           </div>
         </div>
-      </nav>
+        <div className="hero-scroll-hint">
+          <span>Scroll</span>
+          <div className="scroll-line" />
+        </div>
+      </section>
 
-      {/* Contenu principal */}
-      <main className="main-content">
-        {/* À propos */}
-        <section className="about-section">
-          <div className="glass-card">
-            <div className="glass-glow glass-glow-1"></div>
-            <div className="glass-glow glass-glow-2"></div>
-            <div className="glass-content">
-              <div className="glass-bg-gradient"></div>
-              <div className="glass-bubble glass-bubble-1"></div>
-              <div className="glass-bubble glass-bubble-2"></div>
-              <h2 className="section-title">
-                <span className="title-bar"></span>
-                À propos
-              </h2>
-              <p className="about-text">{profile.description}</p>
+            {/* ── EXPÉRIENCES ── */}
+      <AnimSection id="experiences">
+        <div className="section-header">
+          <span className="section-tag">01</span>
+          <h2 className="section-title">Expériences</h2>
+        </div>
+        <div className="exp-list">
+          {experiences.map((e, i) => (
+            <div className="exp-card" key={i} style={{ animationDelay: `${i * 0.1}s` }}>
+              <div className="exp-header">
+                <div>
+                  <h3 className="exp-poste">{e.poste}</h3>
+                  <p className="exp-entreprise">{e.entreprise}</p>
+                </div>
+                <span className="exp-periode">{e.periode}</span>
+              </div>
+              <ul className="exp-points">
+                {e.points.map((p, j) => <li key={j}>{p}</li>)}
+              </ul>
+              <div className="exp-techs">
+                {e.technologies.map(t => <span className="exp-tech" key={t}>{t}</span>)}
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* Expérience */}
-        {activeSection === 'experience' && (
-          <section className="content-section">
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className="card-wrapper"
-              >
-                <div className={`card-glow card-glow-purple ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`card-glow-xl card-glow-purple ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`glass-card-content ${hoveredCard === index ? 'hovered' : ''}`}>
-                  <div className="card-bg-gradient"></div>
-                  <div className={`card-bubble card-bubble-1 ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                  <div className={`card-bubble card-bubble-2 ${hoveredCard === index ? 'hovered' : ''}`}></div>
-
-                  <div className="card-header">
-                    <div className="card-info">
-                      <h3 className="card-title">{exp.poste}</h3>
-                      <p className="card-company">{exp.entreprise}</p>
-                      <p className="card-period">{exp.periode}</p>
-                    </div>
-                    <div className="card-icon">
-                      <Briefcase size={28} />
-                    </div>
-                  </div>
-
-                  {renderDescription(exp.description)}
-
-                  <div className="card-tags">
-                    {exp.technologies.map((tech, i) => (
-                      <span key={i} className="tag">{tech}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* Formation */}
-        {activeSection === 'formation' && (
-          <section className="content-section">
-            {formations.map((form, index) => (
-              <div
-                key={index}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className="card-wrapper"
-              >
-                <div className={`card-glow card-glow-purple ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`card-glow-xl card-glow-purple ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`glass-card-content ${hoveredCard === index ? 'hovered' : ''}`}>
-                  <div className="card-bg-gradient card-bg-purple"></div>
-                  <div className={`card-bubble card-bubble-purple ${hoveredCard === index ? 'hovered' : ''}`}></div>
-
-                  <div className="card-header">
-                    <div className="card-info">
-                      <h3 className="card-title">{form.diplome}</h3>
-                      <p className="card-company card-company-purple">{form.ecole}</p>
-                      <p className="card-period">{form.periode}</p>
-                    </div>
-                    <div className="card-icon">
-                      <GraduationCap className="icon-purple" size={28} />
-                    </div>
-                  </div>
-
-                  {renderDescription(form.details)}
-                  
-                </div>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* Compétences */}
-        {activeSection === 'competences' && (
-          <section className="skills-section">
-            {[
-              { title: 'Langage', skills: competences.langage },
-              { title: 'IA', skills: competences.ai },
-              { title: 'Vision', skills: competences.vision },
-              { title: 'Cloud', skills: competences.cloud },
-              { title: 'Data&Bi', skills: competences.data },
-            ].map((category, idx) => (
-              <div key={idx} className="skill-card-wrapper">
-                <div className="skill-card-glow"></div>
-                <div className="skill-card-glow-xl"></div>
-                <div className="skill-card">
-                  <div className="skill-card-bg"></div>
-                  <div className="skill-card-bubble"></div>
-
-                  <h3 className="skill-title">
-                    <Code size={24} />
-                    {category.title}
-                  </h3>
-                  <div className="skill-list">
-                    {category.skills.map((skill, i) => (
-                      <div key={i} className="skill-item">
-                        <span>{skill}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {/* Projets */}
-        {activeSection === 'projets' && (
-          <section className="projects-section">
-            {projets.map((projet, index) => (
-              <div
-                key={index}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className="project-card-wrapper"
-                onClick={() => projet.github && window.open(projet.github, '_blank')}
-                style={{ cursor: projet.github ? 'pointer' : 'default' }}
-              >
-                <div className={`project-card-glow ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`project-card-glow-xl ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                <div className={`project-card ${hoveredCard === index ? 'hovered' : ''}`}>
-                  <div className="project-card-bg"></div>
-                  <div className={`project-bubble project-bubble-1 ${hoveredCard === index ? 'hovered' : ''}`}></div>
-                  <div className={`project-bubble project-bubble-2 ${hoveredCard === index ? 'hovered' : ''}`}></div>
-
-                  <div className="project-header">
-                    <h3 className="project-title">{projet.nom}</h3>
-                    <ExternalLink className={`project-link-icon ${hoveredCard === index ? 'visible' : ''}`} size={24} />
-                  </div>
-
-                  <p className="project-description">{projet.description}</p>
-
-                  <div className="project-tags">
-                    {projet.technologies.map((tech, i) => (
-                      <span key={i} className="project-tag">{tech}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </section>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <p className="footer-text">© 2025 {profile.nom}</p>
+          ))}
         </div>
+      </AnimSection>
+
+            {/* ── FORMATIONS ── */}
+      <AnimSection id="formations" className="alt-bg">
+        <div className="section-header">
+          <span className="section-tag">02</span>
+          <h2 className="section-title">Formations</h2>
+        </div>
+        <div className="timeline">
+          {formations.map((f, i) => (
+            <div className="timeline-item" key={i} style={{ animationDelay: `${i * 0.1}s` }}>
+              <div className="timeline-dot" />
+              <div className="timeline-body">
+                <div className="timeline-meta">
+                  <span className="timeline-school">{f.ecole}</span>
+                  <span className="timeline-period">{f.periode}</span>
+                </div>
+                <h3 className="timeline-title">{f.diplome}</h3>
+                {f.details.length > 0 && (
+                  <ul className="timeline-details">
+                    {f.details.map((d, j) => <li key={j}>{d}</li>)}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </AnimSection>
+
+      {/* ── COMPÉTENCES ── */}
+      <AnimSection id="competences">
+        <div className="section-header">
+          <span className="section-tag">03</span>
+          <h2 className="section-title">Compétences</h2>
+        </div>
+        <div className="skills-grid">
+          {Object.entries(competences).map(([cat, skills], i) => (
+            <div className="skill-block" key={cat} style={{ animationDelay: `${i * 0.08}s` }}>
+              <h3 className="skill-block-title">{cat}</h3>
+              <div className="skill-tags">
+                {skills.map(s => <span className="skill-tag" key={s}>{s}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </AnimSection>
+
+            {/* ── PROJETS ── */}
+      <AnimSection id="projets" className="alt-bg">
+        <div className="section-header">
+          <span className="section-tag">04</span>
+          <h2 className="section-title">Projets</h2>
+        </div>
+        <div className="projects-list">
+          {projets.map((p, i) => (
+            <div
+              className={`project-row ${p.github ? 'clickable' : ''}`}
+              key={i}
+              style={{ animationDelay: `${i * 0.07}s` }}
+              onClick={() => p.github && window.open(p.github, '_blank')}
+            >
+              <div className="project-row-text">
+                <div className="project-row-meta">
+                  <span className="project-row-num">{String(i + 1).padStart(2, '0')}</span>
+                  {p.github && <span className="project-row-badge">GitHub ↗</span>}
+                </div>
+                <h3 className="project-row-title">{p.nom}</h3>
+                <p className="project-row-desc">{p.description}</p>
+                <div className="project-row-techs">
+                  {p.technologies.map(t => <span key={t}>{t}</span>)}
+                </div>
+              </div>
+              <div className="project-row-img">
+                {p.image
+                  ? <img src={p.image} alt={p.nom} />
+                  : (
+                    <div className="project-row-placeholder">
+                      <span className="placeholder-icon">&lt;/&gt;</span>
+                      <span className="placeholder-name">{p.nom}</span>
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          ))}
+        </div>
+      </AnimSection>
+
+
+      {/* ── CONTACT ── */}
+      <AnimSection id="contact">
+        <div className="section-header">
+          <span className="section-tag">05</span>
+          <h2 className="section-title">Contact</h2>
+        </div>
+        <div className="contact-layout">
+          <p className="contact-pitch">
+            Disponible pour un CDI en Île-de-France ou en télétravail hybride.<br />
+            N'hésitez pas à me contacter !
+          </p>
+          <div className="contact-links">
+            <a href={`mailto:${profile.email}`} className="contact-link">
+              <span className="contact-icon">✉</span>
+              <span>{profile.email}</span>
+            </a>
+            <a href={`tel:${profile.telephone}`} className="contact-link">
+              <span className="contact-icon">☎</span>
+              <span>{profile.telephone}</span>
+            </a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="contact-link">
+              <span className="contact-icon">in</span>
+              <span>LinkedIn</span>
+            </a>
+            <a href={profile.github} target="_blank" rel="noreferrer" className="contact-link">
+              <span className="contact-icon">&lt;/&gt;</span>
+              <span>GitHub</span>
+            </a>
+            <span className="contact-link no-link">
+              <span className="contact-icon">⌖</span>
+              <span>{profile.localisation}</span>
+            </span>
+          </div>
+        </div>
+      </AnimSection>
+
+      {/* ── FOOTER ── */}
+      <footer className="footer">
+        <p>© 2026 {profile.nom} — Tous droits réservés</p>
       </footer>
     </div>
   );
 }
-
-export default App;
